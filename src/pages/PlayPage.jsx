@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Button, Spinner, Alert } from 'react-bootstrap'
 import PlayingCard from '../components/PlayingCard'
 
-// Ladataan kaikki korttikuvat valmiiksi, jotta ne voidaan näyttää järjestyksessä
+
 function preloadImages(cards) {
   return Promise.all(
     cards.map(
@@ -59,14 +59,14 @@ function PlayPage() {
           <h2 className="h5 mt-3">Sinun korttisi</h2>
           <div className="card-row mb-4">
             {myCards.map((card, index) => (
-              <PlayingCard key={card.code} card={card} delay={index * 0.2} />
+              <PlayingCard key={card.code} card={card} delay={index * 0.3} />
             ))}
           </div>
 
           <h2 className="h5">Pöytä</h2>
           <div className="card-row">
             {tableCards.map((card, index) => (
-              <PlayingCard key={card.code} card={card} delay={(index + 2) * 0.2} />
+              <PlayingCard key={card.code} card={card} delay={(index + 2) * 0.3} />
             ))}
           </div>
         </>
