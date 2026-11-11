@@ -1,7 +1,9 @@
 import { useState } from 'react'
 import { Button, Spinner, Alert } from 'react-bootstrap'
 import PlayingCard from '../components/PlayingCard'
+import { evaluateHand } from '../utils/evaluateHand'
 
+const DEAL_SPEED = 0.6 
 
 function preloadImages(cards) {
   return Promise.all(
@@ -43,6 +45,7 @@ function PlayPage() {
 
   const myCards = cards.slice(0, 2)
   const tableCards = cards.slice(2)
+  const handName = cards.length > 0 ? evaluateHand(cards) : null
 
   return (
     <>
@@ -59,16 +62,24 @@ function PlayPage() {
           <h2 className="h5 mt-3">Sinun korttisi</h2>
           <div className="card-row mb-4">
             {myCards.map((card, index) => (
-              <PlayingCard key={card.code} card={card} delay={index * 0.3} />
+              <PlayingCard key={card.code} card={card} delay={index * DEAL_SPEED} />
             ))}
           </div>
 
           <h2 className="h5">Pöytä</h2>
           <div className="card-row">
             {tableCards.map((card, index) => (
-              <PlayingCard key={card.code} card={card} delay={(index + 2) * 0.3} />
+              <PlayingCard key={card.code} card={card} delay={(index + 2) * DEAL_SPEED} />
             ))}
           </div>
+
+          <Alert
+            variant="success"
+            className="hand-result mt-4"
+            style={{ animationDelay: `${6 * DEAL_SPEED + 0.4}s` }}
+          >
+            Kätesi: <strong>{handName}</strong>
+          </Alert>
         </>
       )}
     </>
