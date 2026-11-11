@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Button, Spinner, Alert } from 'react-bootstrap'
 import PlayingCard from '../components/PlayingCard'
 import { evaluateHand } from '../utils/evaluateHand'
+import { saveHand } from '../utils/history'
 
 const DEAL_SPEED = 0.6 
 
@@ -36,6 +37,7 @@ function PlayPage() {
       const data = await response.json()
       await preloadImages(data.cards)
       setCards(data.cards)
+      saveHand(data.cards, evaluateHand(data.cards))
     } catch {
       setError('Korttien haku epäonnistui. Yritä uudelleen.')
     } finally {
