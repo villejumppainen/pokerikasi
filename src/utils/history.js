@@ -11,7 +11,6 @@ export function saveHand(cards, handName) {
     cards: cards,
     handName: handName,
   }
-  // Uusin ensin, säilytetään 20 viimeisintä
   const history = [newEntry, ...loadHistory()].slice(0, 20)
   localStorage.setItem(STORAGE_KEY, JSON.stringify(history))
 }
